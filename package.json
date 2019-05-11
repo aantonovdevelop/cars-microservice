@@ -1,0 +1,23 @@
+{
+  "name": "cars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Artem Antonov <aantonov.develop@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "moleculer": "^0.13.9",
+    "moleculer-db": "^0.7.9",
+    "moleculer-db-adapter-mongo": "^0.4.2",
+    "moleculer-web": "^0.8.5",
+    "mongodb": "^3.2.4",
+    "soap": "^0.27.1"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4"
+  }
+}
