@@ -1,13 +1,14 @@
-const soap = require("soap");
-
 module.exports = class CBRFFetcher {
-    // noinspection JSMethodCanBeStatic
+    constructor(soap) {
+        this.soap = soap;
+    }
+
     async get(currency, date) {
-        const client = await soap.createClientAsync("http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?WSDL");
+        const client = await this.soap.createClientAsync("http://www.cbr.ru/DailyInfoWebServ/DailyInfo.asmx?WSDL");
 
         const currencies = await client.GetCursOnDateXMLAsync({"On_date": date});
 
-        return findCurrencyValue(currencies, currency).Vcurs || 0;
+        return Number.parseFloat(findCurrencyValue(currencies, currency).Vcurs) || 0;
     }
 };
 

@@ -8,12 +8,12 @@ module.exports = class GatewayHandler {
     async get({mark, color, currency, limit}) {
         const currencyPrice = currency ? await this.broker.call("currency.get", {currency}) : SameCost;
 
-        return this.broker.call("cars-generator.getAll", {mark, color, limit, currency: Number.parseFloat(currencyPrice)});
+        return this.broker.call("cars-generator.getAll", {mark, color, limit, currency: currencyPrice});
     }
 
     async getById({id, currency}) {
         const currencyPrice = currency ? await this.broker.call("currency.get", {currency}) : SameCost;
 
-        return this.broker.call("cars-generator.getById", {id, currency: Number.parseFloat(currencyPrice)});
+        return this.broker.call("cars-generator.getById", {id, currency: currencyPrice});
     }
 };

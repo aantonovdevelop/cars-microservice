@@ -1,3 +1,4 @@
+const soap = require("soap");
 const {Service} = require("moleculer");
 
 const CBRFFetcher = require("./lib/cbrf");
@@ -7,7 +8,7 @@ module.exports = class Currency extends Service {
     constructor(broker) {
         super(broker);
 
-        const handler = new CurrencyHandler(new CBRFFetcher());
+        const handler = new CurrencyHandler(new CBRFFetcher(soap));
 
         this.parseServiceSchema({
             name: "currency",
