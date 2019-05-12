@@ -11,7 +11,7 @@ module.exports = class CarsGenerator extends Service {
     constructor(broker) {
         super(broker);
 
-        const adapter = new MongoDbAdapter("mongodb://localhost/cars_db");
+        const adapter = new MongoDbAdapter("mongodb://cars-mongo/cars_db");
 
         const repository = new CarsRepository(adapter);
         const generator = new RandomCarsGenerator();
@@ -93,6 +93,8 @@ module.exports = class CarsGenerator extends Service {
                 adapter.init(broker, this);
 
                 await adapter.connect();
+
+                await adapter.collection.ensureIndex({model: 1, color: 1});
             }
         });
     }
