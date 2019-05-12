@@ -37,6 +37,7 @@ module.exports = class Gateway extends Service {
             settings: {
                 routes: [{
                     aliases: {
+                        "GET cars/generator": "cars-generator.generate",
                         "GET cars": "gateway.get",
                         "GET cars/:id": "gateway.getById",
                         "POST cars": "cars-generator.create",

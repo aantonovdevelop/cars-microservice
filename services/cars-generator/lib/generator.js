@@ -20,7 +20,7 @@ module.exports = class RandomCarsGenerator {
 };
 
 async function* carsGenerator(count) {
-    for (const index of new Array(count)) {
+    for (let i = 0; i < count; i++) {
         const car = {
             mark: Models[getRandom(0, Models.length)],
             color: Colors[getRandom(0, Colors.length)],

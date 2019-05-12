@@ -5,6 +5,8 @@ const CarsRepository = require("./lib/repository");
 const RandomCarsGenerator = require("./lib/generator");
 const CarsGeneratorHandler = require("./lib/handler");
 
+const OneDay = 60*60*24;
+
 module.exports = class CarsGenerator extends Service {
     constructor(broker) {
         super(broker);
@@ -14,7 +16,7 @@ module.exports = class CarsGenerator extends Service {
         const repository = new CarsRepository(adapter);
         const generator = new RandomCarsGenerator();
 
-        const handler = new CarsGeneratorHandler(repository, generator);
+        const handler = new CarsGeneratorHandler(repository, generator, broker);
 
         this.parseServiceSchema({
             name: "cars-generator",
@@ -23,20 +25,28 @@ module.exports = class CarsGenerator extends Service {
             collection: "cars",
 
             actions: {
-                getAll: {
+                get: {
                     params: {
                         mark: {type: "string", empty: false, optional: true},
                         color: {type: "string", empty: false, optional: true},
                         currency: {type: "number", convert: true, optional: true},
                         limit: {type: "number", positive: true, integer: true, convert: true, optional: true},
                     },
-                    handler: (ctx) => handler.getAll.bind(handler)(ctx.params),
+                    cache: {
+                        keys: ["mark", "color", "currency", "limit"],
+                        ttl: OneDay,
+                    },
+                    handler: (ctx) => handler.get.bind(handler)(ctx.params),
                 },
 
                 getById: {
                     params: {
                         id: {type: "string", empty: false},
                         currency: {type: "number", convert: true, optional: true},
+                    },
+                    cache: {
+                        keys: ["id", "currency"],
+                        ttl: OneDay,
                     },
                     handler: (ctx) => handler.getById.bind(handler)(ctx.params),
                 },

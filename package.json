@@ -10,11 +10,14 @@
   "author": "Artem Antonov <aantonov.develop@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "ioredis": "^4.9.3",
     "moleculer": "^0.13.9",
+    "moleculer-console-tracer": "^0.2.1",
     "moleculer-db": "^0.7.9",
     "moleculer-db-adapter-mongo": "^0.4.2",
     "moleculer-web": "^0.8.5",
     "mongodb": "^3.2.4",
+    "nats": "^1.2.10",
     "soap": "^0.27.1"
   },
   "devDependencies": {
