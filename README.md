@@ -55,3 +55,8 @@ npm run test
     
 - DELETE /car
 - DELETE /car/:id
+
+## Structure
+[Components Diagram](uml/Components.png)
+
+[Activity Diagram](uml/Activity.png)
