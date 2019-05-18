@@ -15,6 +15,8 @@ module.exports = class CarsRepository {
     }
 
     get(filter = {}, limit = Unlimited, currency = SameCost) {
+        currency = currency === 0 ? NaN : currency;
+
         let pipeline = [{
             $match: filter,
         }, {

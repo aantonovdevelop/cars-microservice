@@ -106,6 +106,16 @@ describe("CarsRepository", function () {
             assert.strictEqual(result[0].color, "black_3");
             assert.strictEqual(result[1].color, "black_3");
         });
+
+        it('should return a NaN price if we divided by zero', async function () {
+            await adapter.insertMany([
+                {mark: "car_1", color: "black_1", price: 1},
+            ]);
+
+            const result = await repository.get({}, undefined, 0);
+
+            assert.strictEqual(result[0].price, NaN);
+        });
     });
 
     describe(".getById", function () {
